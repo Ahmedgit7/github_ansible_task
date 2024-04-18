@@ -1,0 +1,25 @@
+---
+- hosts: demo
+  user: ansible
+  become: yes
+  gather_facts: yes
+
+  tasks:
+    - name: Install nginx Server
+      yum:
+        name: amazon-linux-extras
+        state: present
+
+    - name: Enable nginx1 from Amazon Linux Extras
+      command: amazon-linux-extras enable nginx1
+
+    - name: Install nginx1 package
+      yum:
+        name: nginx
+        state: present
+
+    - name: Start nginx service
+      service:
+        name: nginx
+        state: started
+        enabled: yes
